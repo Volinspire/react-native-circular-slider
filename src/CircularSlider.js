@@ -61,7 +61,7 @@ export default class CircularSlider extends PureComponent {
     bgCircleColor: PropTypes.string,
     stopIcon: PropTypes.element,
     startIcon: PropTypes.element,
-    fixedStart: PropTypes.bool
+    clockFaceOptions: PropTypes.object
   }
 
   static defaultProps = {
@@ -72,7 +72,7 @@ export default class CircularSlider extends PureComponent {
     gradientColorTo: '#ffcf00',
     clockFaceColor: '#9d9d9d',
     bgCircleColor: '#171717',
-    fixedStart: false
+    clockFaceOptions: {}
   }
 
   state = {
@@ -144,7 +144,7 @@ export default class CircularSlider extends PureComponent {
 
   render() {
     const { startAngle, angleLength, segments, strokeWidth, radius, gradientColorFrom, gradientColorTo, bgCircleColor,
-      showClockFace, clockFaceColor, startIcon, stopIcon } = this.props;
+      showClockFace, clockFaceColor, startIcon, stopIcon, clockFaceOptions } = this.props;
 
     const containerWidth = this.getContainerWidth();
 
@@ -194,6 +194,7 @@ export default class CircularSlider extends PureComponent {
                 <ClockFace
                   r={radius - strokeWidth / 2}
                   stroke={clockFaceColor}
+                  {...{clockFaceOptions}}
                 />
               )
             }

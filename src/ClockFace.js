@@ -8,17 +8,26 @@ export default class ClockFace extends PureComponent {
   static propTypes = {
     r: PropTypes.number,
     stroke: PropTypes.string,
+    hourSteps: PropTypes.number,
+    tickSteps: PropTypes.number,
+    hourMultiplier: PropTypes.number
+  }
+
+  static defaultProps = {
+    hourSteps: 12,
+    tickSteps: 48,
+    hourMultiplier: 1
   }
 
   render() {
-    const { r, stroke } = this.props;
+    const { r, stroke, hourSteps, tickSteps, hourMultiplier } = this.props;
     const faceRadius = r - 5;
     const textRadius = r - 26;
 
     return (
       <G>
         {
-          range(48).map(i => {
+          range(tickSteps).map(i => {
             const cos = Math.cos(2 * Math.PI / 48 * i);
             const sin = Math.sin(2 * Math.PI / 48 * i);
 
@@ -37,16 +46,16 @@ export default class ClockFace extends PureComponent {
         }
       <G transform={{translate: "0, -9"}}>
           {
-            range(12).map((h, i) => (
+            range(hourSteps).map((h, i) => (
               <Text
                 key={i}
                 fill={stroke}
                 fontSize="16"
                 textAnchor="middle"
-                x={textRadius * Math.cos(2 * Math.PI / 12 * i - Math.PI / 2 + Math.PI / 6)}
-                y={textRadius * Math.sin(2 * Math.PI / 12 * i - Math.PI / 2 + Math.PI / 6)}
+                x={textRadius * Math.cos(2 * Math.PI / hourSteps * i - Math.PI / 2 + Math.PI / 6)}
+                y={textRadius * Math.sin(2 * Math.PI / hourSteps * i - Math.PI / 2 + Math.PI / 6)}
               >
-                {h + 1}
+                {(h + 1) * hourMultiplier}
               </Text>
             ))
           }
