@@ -146,6 +146,12 @@ export default class CircularSlider extends PureComponent {
     const { startAngle, angleLength, segments, strokeWidth, radius, gradientColorFrom, gradientColorTo, bgCircleColor,
       showClockFace, clockFaceColor, startIcon, stopIcon, clockFaceOptions } = this.props;
 
+    const {
+      hourMultiplier,
+      hourSteps,
+      tickSteps
+    } = clockFaceOptions;
+
     const containerWidth = this.getContainerWidth();
 
     const start = calculateArcCircle(0, segments, radius, startAngle, angleLength);
@@ -194,7 +200,7 @@ export default class CircularSlider extends PureComponent {
                 <ClockFace
                   r={radius - strokeWidth / 2}
                   stroke={clockFaceColor}
-                  {...{clockFaceOptions}}
+                  {...{hourSteps, tickSteps, hourMultiplier}}
                 />
               )
             }

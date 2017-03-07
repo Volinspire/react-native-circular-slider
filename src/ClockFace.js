@@ -28,8 +28,8 @@ export default class ClockFace extends PureComponent {
       <G>
         {
           range(tickSteps).map(i => {
-            const cos = Math.cos(2 * Math.PI / 48 * i);
-            const sin = Math.sin(2 * Math.PI / 48 * i);
+            const cos = Math.cos(2 * Math.PI / tickSteps * i);
+            const sin = Math.sin(2 * Math.PI / tickSteps * i);
 
             return (
               <Line
